@@ -16,6 +16,10 @@ body {
   align-items: center;
 }
 
+.centered .btn {
+  margin: 0 3rem;
+}
+
 .focused {
   font-size: 3rem;
   font-weight: bold;
