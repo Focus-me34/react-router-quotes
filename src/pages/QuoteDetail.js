@@ -12,7 +12,7 @@ const QuoteDetail = () => {
   const params = useParams();
   const match = useRouteMatch();
 
-  const { sendRequest, status, error, data: singleQuote } = useHttp(getSingleQuote);
+  const { sendRequest, status, error, data: singleQuote } = useHttp(getSingleQuote, true);
 
   useEffect(() => {
     sendRequest(params.quoteId)
@@ -26,19 +26,13 @@ const QuoteDetail = () => {
     return <p className="centered focused">{error}</p>
   }
 
-  const isCompleted = status === "completed";
-
-  console.log(isCompleted);
-
-  // const quote = DUMMY_QUOTES.find(quote => quote.id === +params.quoteId)
-
-  // if (!quote) return <p>No quote found</p>
+  if (!singleQuote.text) {
+    return <p className='centered'>No quote found!</p>
+  }
 
   return (
-
-
     <>
-      {isCompleted && <HighlightedQuote author={singleQuote.author} text={singleQuote.text}></HighlightedQuote>}
+      <HighlightedQuote author={singleQuote.author} text={singleQuote.text}></HighlightedQuote>
 
       <Route exact path={`${match.path}/comments`}>
         <Link to={match.url} className='btn--flat centered'>Show Comments</Link>
@@ -53,7 +47,6 @@ const QuoteDetail = () => {
         <Comments></Comments>
       </Route>
     </>
-
   );
 }
 
