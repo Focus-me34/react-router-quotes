@@ -1,9 +1,14 @@
 import { useRef } from 'react';
+import { useParams } from 'react-router-dom';
+import useHttp from '../../hooks/use-http';
+import { addComment } from '../../lib/api';
 
 import classes from './NewCommentForm.module.css';
 
 const NewCommentForm = (props) => {
   const commentTextRef = useRef();
+  const { sendRequest, status, error } = useHttp(addComment);
+  const { quoteId } = useParams();
 
   const submitFormHandler = (event) => {
     event.preventDefault();
@@ -11,6 +16,8 @@ const NewCommentForm = (props) => {
     // optional: Could validate here
 
     // send comment to server
+    sendRequest({ commentData: commentTextRef.current.value, quoteId: quoteId })
+    props.addComment(quoteId)
   };
 
   return (
