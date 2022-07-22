@@ -32,6 +32,8 @@ const QuoteDetail = () => {
 
   return (
     <>
+      <Link to={"/quotes"} className='btn--flat centered'>Back to Quote List</Link>
+
       <HighlightedQuote author={singleQuote.author} text={singleQuote.text}></HighlightedQuote>
 
       <Route exact path={`${match.path}/comments`}>

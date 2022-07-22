@@ -34,7 +34,7 @@ const Comments = () => {
   // ? We change the content to display based on the status of the HTTP request
   let content
   if (status === "pending") {
-    content = <LoadingSpinner className="centered"></LoadingSpinner>
+    content = <div className="centered"><LoadingSpinner></LoadingSpinner></div>
   } else if (status === "completed" && (error)) {
     content = <><p>An error occured while loading the comments</p><p>{error}</p></>
   } else if (status === "completed") {
